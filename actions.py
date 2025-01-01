@@ -1,4 +1,3 @@
-from generate_id import gen_id
 from datetime import datetime
 from tabulate import tabulate
 import json
@@ -19,14 +18,18 @@ def write_to_json(data, file="data.json"):
 
 
 def expense_add(amount, description=None):
-    content = read_file()
-    ID = gen_id(content)
-    data = {"ID": ID, 'description': description, 'amount': amount,
-            'created_at': str(datetime.now().replace(second=0, microsecond=0))
-            }
-    content.append(data)
-    write_to_json(content)
-    print(f"# Expense added successfully! (ID: {ID})")
+    if amount or description:
+        content = read_file()
+        ID = gen_id(content)
+        data = {"ID": ID, 'description': description, 'amount': amount,
+                'created_at': str(datetime.now().replace(second=0, microsecond=0)),
+                'updated_at': str(datetime.now().replace(second=0, microsecond=0)),
+                }
+        content.append(data)
+        write_to_json(content)
+        print(f"# Expense added successfully! (ID: {ID})")
+    else:
+        print("Provide amount or description data")
 
 
 def gen_id(data):
@@ -46,12 +49,38 @@ def expense_list():
 
 def expense_update_by_id(ID: int, amount: float = None, description: str = None):
     file_content = read_file()
-    for item in file_content:
-        if (amount or description) and item['ID'] == ID:
-            if amount:
-                item['amount'] = amount
-                item['updated_at'] = datetime.now().replace(second=0, microsecond=0)
-            if description:
-                item['description'] = description
-                item['updated_at'] = str(datetime.now().replace(second=0, microsecond=0))
-            print(f"Item ID {ID} changed successfully")
+
+    if amount or description:
+        id_found = False
+        ID = int(ID)
+        for item in file_content:
+            if item['ID'] == ID:
+                id_found = True
+                if amount:
+                    item['amount'] = amount
+                    item['updated_at'] = str(datetime.now().replace(second=0, microsecond=0))
+                if description:
+                    item['description'] = description
+                    item['updated_at'] = str(datetime.now().replace(second=0, microsecond=0))
+                write_to_json(file_content)
+                print(f"Item ID {ID} changed successfully")
+        if not id_found:
+            print(f"Item with ID {ID} not found")
+    else:
+        print("No amount or description data provided")
+
+
+def expense_delete(ID: int):
+    file_content = read_file()
+    if file_content:
+        ID = int(ID)
+        original_length = len(file_content)
+        data = [item for item in file_content if item['ID'] != ID]
+        new_length = len(data)
+        if new_length < original_length:
+            write_to_json(data)
+            print(f"Successfully deleted item with ID {ID}")
+        else:
+            print(f"No changes occurred. Maybe there is no item with such ID?")
+    else:
+        print(f"No data to delete")
