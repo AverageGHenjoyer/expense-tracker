@@ -75,8 +75,6 @@ export PATH=$PATH:/path/to/expense-tracker
 export PATH=$PATH:/path/to/expense-tracker
 ```
 
-Zaktualizuję całą sekcję "Usage" w README, używając komendy `expense-tracker`:
-
 ```markdown
 ## Usage
 
