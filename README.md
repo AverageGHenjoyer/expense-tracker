@@ -1,5 +1,8 @@
 # Expense Tracker
 
+[Project](https://roadmap.sh/projects/expense-tracker) idea
+from [backend idea projects](https://roadmap.sh/backend/projects) from [roadmap.sh](roadmap.sh).
+
 A command-line expense tracking application that helps you monitor and analyze your spending. Track expenses by
 category, generate summaries, and export data to CSV.
 
@@ -34,7 +37,9 @@ Get into cloned repo
 ```bash
 cd expense-tracker
 ```
+
 Create and Activate a Virtual Environment
+
 ```
 python -m venv venv
 
@@ -44,6 +49,7 @@ python -m venv venv
 # On macOS and Linux:
 source venv/bin/activate
 ```
+
 Install locally using pip
 
 ```bash
