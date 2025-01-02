@@ -21,62 +21,113 @@ category, generate summaries, and export data to CSV.
     - pandas
     - json (built-in)
 
-Install dependencies using:
+## Installation:
+
+Clone the repo:
 
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/maciej3j/expense-tracker
 ```
 
+Get into cloned repo
+
+```bash
+cd expense-tracker
+```
+
+Install locally using pip
+
+```bash
+pip install -e .
+```
+
+Add to PATH
+
+### Windows
+
+1. Manual method:
+    - Press Win + X and select "System"
+    - Click "Advanced system settings"
+    - Click "Environment Variables"
+    - Under "User variables", find and select "Path"
+    - Click "Edit"
+    - Click "New"
+    - Add the path to your expense-tracker directory
+    - Click "OK" to close all windows
+
+2. Command line method (run as administrator):
+
+```bash
+setx PATH "%PATH%;C:\path\to\expense-tracker"
+```
+
+Linux/Unix
+
+1. For Bash
+
+```bash
+export PATH=$PATH:/path/to/expense-tracker
+```
+
+2. For Zsh
+
+```bash
+export PATH=$PATH:/path/to/expense-tracker
+```
+
+Zaktualizuję całą sekcję "Usage" w README, używając komendy `expense-tracker`:
+
+```markdown
 ## Usage
 
 ### Add an expense
 
 ```bash
-python main.py add -a AMOUNT -d DESCRIPTION
+expense-tracker add -a AMOUNT -d DESCRIPTION
 # Example:
-python main.py add -a 49.99 -d "Groceries from Walmart"
+expense-tracker add -a 49.99 -d "Groceries from Walmart"
 ```
 
 ### List expenses
 
 ```bash
 # List all expenses
-python main.py list
+expense-tracker list
 
 # Filter by category
-python main.py list -c "Food"
+expense-tracker list -c "Food"
 ```
 
 ### Update an expense
 
 ```bash
-python main.py update -id ID -a AMOUNT -d DESCRIPTION
+expense-tracker update -id ID -a AMOUNT -d DESCRIPTION
 # Example:
-python main.py update -id 1 -a 52.99 -d "Updated description"
+expense-tracker update -id 1 -a 52.99 -d "Updated description"
 ```
 
 ### Delete an expense
 
 ```bash
-python main.py delete -id ID
+expense-tracker delete -id ID
 # Example:
-python main.py delete -id 1
+expense-tracker delete -id 1
 ```
 
 ### Get expense summary
 
 ```bash
 # Get total expenses
-python main.py summary
+expense-tracker summary
 
 # Get expenses for specific month
-python main.py summary -m 5  # For May
+expense-tracker summary -m 5  # For May
 ```
 
 ### Export to CSV
 
 ```bash
-python main.py to_csv
+expense-tracker to_csv
 ```
 
 ## Categories
