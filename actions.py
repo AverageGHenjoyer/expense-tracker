@@ -84,3 +84,19 @@ def expense_delete(ID: int):
             print(f"No changes occurred. Maybe there is no item with such ID?")
     else:
         print(f"No data to delete")
+
+
+def expense_summary(month: int = 0):
+    content = read_file()
+    count = 0
+    if month:
+        for item in content:
+            expense_date = datetime.strptime(item['created_at'], '%Y-%m-%d %H:%M:%S')
+            if expense_date.month == month:
+                count += item['amount']
+        print(f"Expenses in month {month}: {count}")
+
+    else:
+        for item in content:
+            count += item['amount']
+        print(f"Expenses overall: {count}")

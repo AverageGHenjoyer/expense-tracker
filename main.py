@@ -1,11 +1,25 @@
 from actions import *
 import argparse
 
-parser = argparse.ArgumentParser(prog="expense-tracker", description="Add, list oe summarize your expenses!")
-parser.add_argument('action', help="Action to take. Can be: add, list, summary, delete", type=str)
-parser.add_argument("-id", type=str)
-parser.add_argument('-a', '--amount', type=float, default=0)
-parser.add_argument('-d', '--description', type=str)
+parser = argparse.ArgumentParser()
+subparsers = parser.add_subparsers(dest="action", required=True, help="Subcommands")
+
+add_parser = subparsers.add_parser("add", help="Add new expense")
+add_parser.add_argument("-a", "--amount", type=float, required=True)
+add_parser.add_argument("-d", "--description", type=str, required=True)
+
+list_parser = subparsers.add_parser("list", help="List all expenses")
+# list_parser.add_argument("-")
+update_parser = subparsers.add_parser("update", help="Update an expense")
+update_parser.add_argument("-id", type=int)
+update_parser.add_argument("-a", "--amount", type=float)
+update_parser.add_argument("-d", "--description", type=str)
+
+delete_parser = subparsers.add_parser("delete", help="Delete an expense")
+delete_parser.add_argument("-id", type=int)
+
+summary_parser = subparsers.add_parser("summary", help="Summarize an expense")
+summary_parser.add_argument("-m", "--month", choices=range(1, 13), type=int, help="Month number (1-12)")
 
 args = parser.parse_args()
 
@@ -24,3 +38,6 @@ match args.action:
 
     case "delete":
         expense_delete(ID=args.id)
+
+    case "summary":
+        expense_summary(month=args.month)
