@@ -34,7 +34,16 @@ Get into cloned repo
 ```bash
 cd expense-tracker
 ```
+Create and Activate a Virtual Environment
+```
+python -m venv venv
 
+# On Windows:
+.\venv\Scripts\activate
+
+# On macOS and Linux:
+source venv/bin/activate
+```
 Install locally using pip
 
 ```bash
