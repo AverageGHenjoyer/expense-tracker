@@ -26,7 +26,7 @@ category, generate summaries, and export data to CSV.
 Clone the repo:
 
 ```bash
-git clone https://github.com/maciej3j/expense-tracker
+git clone https://github.com/maciej3j/expense-tracker.git
 ```
 
 Get into cloned repo
