@@ -100,6 +100,10 @@ def expense_list(category: str = None):
 
 
 def expense_update_by_id(ID: int, amount: float = None, description: str = None):
+    if amount is not None and amount < 0:
+        print("Error: amount must be positive")
+        return
+
     file_content = read_file()
 
     if amount or description:
